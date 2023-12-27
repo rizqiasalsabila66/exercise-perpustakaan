@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang ="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout :: head}"></head>
+<body class="main-body">
+
+<th:block th:replace="~{layout :: template('Books By Category')}"></th:block>
+<main>
+    <a th:href="@{/category/index}" class="blue-button">Back to Category</a>
+    <div class="grid-container">
+        <div class="header-info">
+            <div>
+                List of <span th:text="${header}"></span> Books
+            </div>
+        </div>
+        <form class="filter" method="get" th:action="@{/category/books}">
+            <input type="text" placeholder="title ..." name="title" th:value="${title}">
+            <input type="text" placeholder="author ..." name="author" th:value="${author}">
+            <label for="isBorrowed">is Available</label>
+            <input type="checkbox" name="isBorrowed" th:value="false" id="isBorrowed">
+            <button type="submit" th:name="name" th:value="${header}" class="blue-button">Search</button>
+        </form>
+        <a th:href="@{/category/insertBookForm(name=${header})}" class="blue-button create-button">Insert New Book</a>
+        <table>
+            <thead>
+            <tr>
+                <th>Action</th>
+                <th>Book Title</th>
+                <th>Author</th>
+                <th>Is Borrowed</th>
+                <th>Release Date</th>
+                <th>Total Page</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            <tr th:each="row:${grid}" th:object="${row}">
+                <td>
+                    <a class="blue-button" th:href="@{/category/updateBookForm(code=*{code},name=${header})}">Update</a>
+                    <a class="blue-button" th:href="@{/category/deleteBook(code=*{code},name=${header})}">Delete</a>
+                </td>
+                <td th:text="*{title}"></td>
+                <td th:text="*{author}"></td>
+                <td th:text="*{isBorrowed} ? 'Borrowed' : 'Available'"></td>
+                <td th:text="*{#temporals.format(releaseDate, 'dd/MM/yyyy')}"></td>
+                <td th:text="*{totalPage}"></td>
+            </tr>
+            </tbody>
+            <tfoot>
+            <tr>
+                <td colspan="6">
+                    <div class="pagination">
+                        <div th:text="|page ${currentPage} of ${totalPages}|"></div>
+                        <div th:if="${totalPages !=0}">
+                            <a th:each="number : ${#numbers.sequence(1, totalPages)}"
+                               th:text="${number}" th:href="@{/category/books(name=${header}, page=${number},
+                               title=${title},author=${author},isBorrowed=${isBorrowed})}"></a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            </tfoot>
+        </table>
+    </div>
+</main>
+
+</body>
+</html>

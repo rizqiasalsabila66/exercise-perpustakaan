@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="head">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Basilisk</title>
+    <link rel="icon" type="image/ico" th:href="@{/favicon.ico}">
+    <link rel="stylesheet" th:href="@{/resources/css/normalize.css}">
+    <link rel="stylesheet" th:href="@{/resources/css/font-awesome.css}">
+    <link rel="stylesheet" th:href="@{/resources/css/site.css}">
+    <link rel="stylesheet" th:href="@{/resources/css/normalize.css}">
+    <script th:src="@{/resources/js/jquery-3.6.0.js}"></script>
+</head>
+<body>
+<div  th:fragment="formInsertDialog" class="popup-dialog form-insert-dialog">
+    <header>
+        <h1>Category Form</h1>
+        <a href="javascript:;" class="close-button">
+            <i class="fas fa-window-close"></i>
+        </a>
+    </header>
+    <form>
+        <table>
+            <tbody>
+            <tr>
+                <td>Name*</td>
+                <td>
+                    <input type="text" class="name">
+                    <div class="validation-message" data-for="name"></div>
+                </td>
+            </tr>
+            <tr>
+                <td>Floor*</td>
+                <td>
+                    <input type="number" class="floor">
+                    <div class="validation-message" data-for="floor"></div>
+                </td>
+            </tr>
+            <tr>
+                <td>Isle*</td>
+                <td>
+                    <input type="text" class="isle">
+                    <div class="validation-message" data-for="isle"></div>
+                </td>
+            </tr>
+            <tr>
+                <td>Bay*</td>
+                <td>
+                    <input type="text" class="bay">
+                    <div class="validation-message" data-for="bay"></div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <button type="submit" class="blue-button">Save Category</button>
+    </form>
+</div>
+</body>
+</html>

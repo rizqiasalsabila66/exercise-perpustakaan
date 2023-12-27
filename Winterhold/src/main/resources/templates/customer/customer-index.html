@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang ="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout :: head}"></head>
+<body class="main-body">
+
+<th:block th:replace="~{layout :: template('Customer Index')}"></th:block>
+<main>
+    <div class="grid-container customer-index">
+        <form class="filter" method="get" th:action="@{/customer/index}">
+            <input type="text" placeholder="Membership Number ..." name="membershipNumber" th:value="${membershipNumber}">
+            <input type="text" placeholder="Customer name ..." name="name" th:value="${name}">
+            <button type="submit" class="blue-button">Search</button>
+        </form>
+        <a th:href="@{/customer/insertForm}" class="blue-button create-button">Insert New Category</a>
+        <table>
+            <thead>
+            <tr>
+                <th>action</th>
+                <th>Membership Number</th>
+                <th>Full Name</th>
+                <th>Expire Date</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            <tr th:each="row:${grid}" th:object="${row}">
+                <td>
+                    <a class="blue-button" th:href="@{/customer/updateForm(membershipNumber=*{membershipNumber})}">Update</a>
+                    <a class="blue-button" th:href="@{/customer/delete(membershipNumber=*{membershipNumber})}">Delete</a>
+                    <a class="blue-button" th:href="@{/customer/extend(membershipNumber=*{membershipNumber})}">Extend</a>
+                </td>
+                <td><a class="biodata-button" th:text="*{membershipNumber}" href="javascript:;"
+                       th:attr="data-membershipNumber=*{membershipNumber}"></a> </td>
+                <td th:text="*{fullName}"></td>
+                <td th:text="*{#temporals.format(membershipExpireDate, 'dd/MM/yyyy')}"></td>
+            </tr>
+            </tbody>
+            <tfoot>
+            <tr>
+                <td colspan="4">
+                    <div class="pagination">
+                        <div th:text="|page ${currentPage} of ${totalPages}|"></div>
+                        <div th:if="${totalPages !=0}">
+                            <a th:each="number : ${#numbers.sequence(1, totalPages)}"
+                               th:text="${number}" th:href="@{/customer/index(page=${number}, name=${name},
+                               membershipNumber=${membershipNumber})}"></a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            </tfoot>
+        </table>
+    </div>
+</main>
+
+<div class="modal-layer">
+    <th:block th:replace="~{customer/customer-biodata-popup :: biodataDialog}"></th:block>
+</div>
+<!--JAVASCRIPT BUAT POPUP DIALOG-->
+<script th:src="@{/resources/js/customer/customer-popup.js}"></script>
+
+
+
+</body>
+</html>

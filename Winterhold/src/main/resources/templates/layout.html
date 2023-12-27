@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head th:fragment="head">
+    <meta charset="UTF-8">
+    <meta http-equip="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WinterHold</title>
+    <!--    dinamyc path pakai @-->
+    <link rel="icon" type="image/ico" th:href="@{/favicon.ico}">
+    <link rel="stylesheet" th:href="@{/resources/css/normalize.css}">
+    <link rel="stylesheet" th:href="@{/resources/css/font-awesome.css}">
+    <link rel="stylesheet" th:href="@{/resources/css/site.css}">
+    <script th:src="@{/resources/js/jquery-3.6.0.js}"></script>
+</head>
+<body>
+<th:block th:fragment="template(breadCrumbs)">
+    <nav>
+        <a class="menu" th:href="@{/}">
+            <i class="fas fa-th"></i>
+            <span>Home</span>
+        </a>
+        <a class="menu" th:href="@{/author/index}">
+            <i class="fas fa-th"></i>
+            <span>Author</span>
+        </a>
+        <a class="menu" th:href="@{/category/index}">
+            <i class="fas fa-th"></i>
+            <span>Book</span>
+        </a>
+        <a class="menu" th:href="@{/customer/index}">
+            <i class="fas fa-th"></i>
+            <span>Customer</span>
+        </a>
+    </nav>
+    <footer>
+        Copyright &copy; 2023
+        <span class="author">Rizqia Salsabila</span>
+        All rights reserved
+    </footer>
+</th:block>
+
+<!--<header th:fragment="account-header" class="company-logo">-->
+<!--    <h1>-->
+<!--        <span class="bold">Winterhold</span>-->
+<!--    </h1>-->
+<!--</header>-->
+
+</body>
+</html>

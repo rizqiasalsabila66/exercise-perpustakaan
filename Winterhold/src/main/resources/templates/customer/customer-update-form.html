@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang ="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{layout :: head}"></head>
+<body class="main-body">
+
+<th:block th:replace="~{layout :: template('Customer Update Form')}"></th:block>
+<main>
+    <form class="upsert-form" method="post" th:action="@{/customer/update}" th:object="${dto}">
+        <table>
+            <tbody>
+            <tr>
+                <td>
+                    <label>Membership Number*</label>
+                </td>
+                <td>
+                    <input type="text" th:field="*{membershipNumber}" readonly>
+                    <div class="field-validation-error" th:errors="*{membershipNumber}"></div>
+                </td>
+            </tr>
+            <tr>
+            <tr>
+                <td>
+                    <label>First Name*</label>
+                </td>
+                <td>
+                    <input type="text" th:field="*{firstName}">
+                    <div class="field-validation-error" th:errors="*{firstName}"></div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>Last Name</label>
+                </td>
+                <td>
+                    <input type="text" th:field="*{lastName}">
+                    <div class="field-validation-error" th:errors="*{lastName}"></div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>Birth Date*</label>
+                </td>
+                <td>
+                    <input type="date" th:field="*{birthDate}">
+                    <div class="field-validation-error" th:errors="*{birthDate}"></div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>Genre*</label>
+                </td>
+                <td>
+                    <label for="laki-laki">Laki-laki</label>
+                    <input type="radio" value="laki-laki" id="laki-laki" th:field="*{gender}">
+                    <label for="perempuan">perempuan</label>
+                    <input type="radio" value="perempuan" id="perempuan" th:field="*{gender}">
+                    <div class="field-validation-error" th:errors="*{gender}"></div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>Phone</label>
+                </td>
+                <td>
+                    <input type="text" th:field="*{phone}">
+                    <div class="field-validation-error" th:errors="*{phone}"></div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>Address</label>
+                </td>
+                <td>
+                    <textarea th:field="*{address}"></textarea>
+                    <div class="field-validation-error" th:errors="*{address}"></div>
+                </td>
+            </tr>
+            <input type="hidden" th:field="*{membershipExpireDate}">
+            </tbody>
+        </table>
+        <button type="submit" class="blue-button">Submit Customer</button>
+    </form>
+</main>
+
+</body>
+</html>

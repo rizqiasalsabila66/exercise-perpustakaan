@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang ="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout :: head}"></head>
+<body class="main-body">
+
+<th:block th:replace="~{layout :: template('Books By Author')}"></th:block>
+<main>
+    <a th:href="@{/author/index}" class="blue-button">Back to Author</a>
+    <div class="grid-container">
+        <div class="header-info" th:object="${header}">
+            <table>
+                <tbody>
+                <tr>
+                    <td>
+                        <span>Name</span>
+                    </td>
+                    <td>
+                        <span th:text="*{fullName}"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span>Birth Date</span>
+                    </td>
+                    <td>
+                        <span th:text="*{#temporals.format(birthDate, 'dd/MM/yyyy')}"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span>Deceased Date</span>
+                    </td>
+                    <td>
+                        <span th:text="*{#temporals.format(deceasedDate, 'dd/MM/yyyy')}"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span>Education</span>
+                    </td>
+                    <td>
+                        <span th:text="*{education}"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span>Summary</span>
+                    </td>
+                    <td>
+                        <span th:text="*{summary}"></span>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <table>
+            <thead>
+            <tr>
+                <th>Book Title</th>
+                <th>Category</th>
+                <th>Is Borrowed</th>
+                <th>Release Date</th>
+                <th>Total Page</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="row:${grid}" th:object="${row}">
+                <td th:text="*{title}"></td>
+                <td th:text="*{category}"></td>
+                <td th:text="*{isBorrowed} ? 'Borrowed' : 'Available'"></td>
+                <td th:text="*{#temporals.format(releaseDate, 'dd/MM/yyyy')}"></td>
+                <td th:text="*{totalPage}"></td>
+            </tr>
+            </tbody>
+            <tfoot>
+            <tr>
+                <td colspan="6">
+                    <div class="pagination">
+                        <div th:text="|page ${currentPage} of ${totalPages}|"></div>
+                        <div th:if="${totalPages !=0}">
+                            <a th:each="number : ${#numbers.sequence(1, totalPages)}"
+                               th:text="${number}" th:href="@{/author/books(id=${header.id}, page=${number})}"></a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            </tfoot>
+        </table>
+    </div>
+</main>
+
+</body>
+</html>

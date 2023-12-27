@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="head">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Basilisk</title>
+  <link rel="icon" type="image/ico" th:href="@{/favicon.ico}">
+  <link rel="stylesheet" th:href="@{/resources/css/normalize.css}">
+  <link rel="stylesheet" th:href="@{/resources/css/font-awesome.css}">
+  <link rel="stylesheet" th:href="@{/resources/css/site.css}">
+  <link rel="stylesheet" th:href="@{/resources/css/normalize.css}">
+  <script th:src="@{/resources/js/jquery-3.6.0.js}"></script>
+</head>
+<body>
+<div  th:fragment="biodataDialog" class="popup-dialog biodata-dialog">
+  <table>
+    <tbody>
+    <tr>
+      <td>Membership Number</td>
+      <td class="membershipNumber"></td>
+    </tr>
+    <tr>
+      <td>Full Name</td>
+      <td class="fullName"></td>
+    </tr>
+    <tr>
+      <td>Birth Date</td>
+      <td class="birthDate"></td>
+    </tr>
+    <tr>
+      <td>Gender</td>
+      <td class="gender"></td>
+    </tr>
+    <tr>
+      <td>Phone</td>
+      <td class="phone"></td>
+    </tr>
+    <tr>
+      <td>Address</td>
+      <td class="address"></td>
+    </tr>
+    </tbody>
+  </table>
+  <a href="javascript:;" class="blue-button close-button">Close</a>
+</div>
+</body>
+</html>

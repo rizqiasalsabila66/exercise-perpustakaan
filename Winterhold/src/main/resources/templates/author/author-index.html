@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang ="en" xmlns:th="http://www.thymeleaf.org">
+<!--th = pemakaian thymeleaf-->
+<!--$ untuk menarik data dari atribut
+    @ link atau url
+    ~ untuk menarik fragment dari html lain
+    * simbol untuk mengeluarkan field dari th object
+    # adalah library thymeleaf, artinya object yang berasal dari library-->
+<head th:replace="~{layout :: head}"></head>
+<body class="main-body">
+
+<th:block th:replace="~{layout :: template('Author Index')}"></th:block>
+<main>
+    <div class="grid-container author-index">
+        <form class="filter" method="get" th:action="@{/author/index}">
+        <input type="text" placeholder="Author name ..." name="name" th:value="${name}">
+            <button type="submit" class="blue-button">Search</button>
+        </form>
+        <a th:href="@{/author/upsertForm}" class="blue-button create-button">Insert New Author</a>
+        <table>
+            <thead>
+            <tr>
+                <th>action</th>
+                <th>Full Name</th>
+                <th>Age</th>
+                <th>Status</th>
+                <th>Education</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            <tr th:each="row:${grid}" th:object="${row}">
+                <td>
+                    <a class="blue-button" th:href="@{/author/books(id=*{id})}">Book</a>
+                    <a class="blue-button" th:href="@{/author/upsertForm(id=*{id})}">Update</a>
+                    <a class="blue-button" th:href="@{/author/delete(id=*{id})}">Delete</a>
+                </td>
+                <td th:text="*{fullName}"></td>
+                <td th:text="TBC"></td>
+                <td>
+                    <span th:if="*{deceasedDate == null}">Alive</span>
+                    <span th:unless="*{deceasedDate == null}">Deceased</span>
+                </td>
+                <td th:text="*{education}"></td>
+            </tr>
+            </tbody>
+            <tfoot>
+            <tr>
+                <td colspan="6">
+                    <div class="pagination">
+                        <div th:text="|page ${currentPage} of ${totalPages}|"></div>
+                        <div th:if="${totalPages !=0}">
+                            <a th:each="number : ${#numbers.sequence(1, totalPages)}"
+                               th:text="${number}" th:href="@{/author/index(page=${number}, name=${name})}"></a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            </tfoot>
+        </table>
+    </div>
+</main>
+
+</body>
+</html>

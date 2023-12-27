@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang ="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{layout :: head}"></head>
+<body class="main-body">
+
+<th:block th:replace="~{layout :: template('Fail Delete Book')}"></th:block>
+<main>
+    <div class="fail-container">
+        <p>Ada <span th:text="${dependencies}"></span> peminjaman yang ditemukan pada buku ini.</p>
+        <p>Anda tidak bisa menghapus buku ini selama data peminjaman tersebut masih ada di database</p>
+        <p>silahkan hubungi IT department untuk penjelasan lebih detail</p>
+    </div>
+    <a class="blue-button" th:href="@{/category/books}">Back to Book</a>
+</main>
+
+</body>
+</html>
